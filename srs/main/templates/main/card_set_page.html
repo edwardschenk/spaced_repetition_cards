@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{SetName}}{% endblock %}
+
+{% block content%}
+<h1>{{SetName}}</h1>
+<p><a href="makecards/">Make Cards</a></p>
+<p><a href="flashcards/">Flashcards</a></p>
+
+<ul>
+    <li>Cards:</li>
+    {% for card in cards %}
+        <li>{{card.word_en}}: {{card.word_ko}}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center" style="display: block;">
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" name="{{card.id}}_incorrect" style="width:9rem;" class="btn btn-outline-danger"><h1>X</h1></button>
+  </form>
+  <div class="px-2"> </div>
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" name="{{card.id}}_correct" style="width:9rem;" class="btn btn-outline-success"><h1>OK</h1></button>
+  </form>
+</div>
+
+<br>
+
+<div class="accordion mx-auto" id="accordionPanelsStayOpenExample" style="width: 36rem; display: block;">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+        <h2>앞쪽</h3>
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+      <div class="accordion-body">
+        {% block cardfront %}
+        
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        <h2>뒷면</h2>
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+      <div class="accordion-body">
+        {% block cardback %}
+
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

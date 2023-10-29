@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content%}
+
+<div class="position-relative" width="100%" style="text-align: center;">
+  <div class="flip-card bg-dark text-white" style="margin: auto;">
+    <div class="flip-card-inner card" style="width: 36rem; height: 26rem;">
+      <div class="card-body">
+        <h1 class="card-title align-middle">{{card.front_text}}</h5>
+      </div>
+        <div class="flip-card-img-overlay card" style="width: 36rem; height: 26rem;">
+          <div class="card-body">
+              <h1 class="card-title align-middle">{{card.back_text}}</h5>
+              {% if card.image %}
+                  <img src='{{card.image.url}}'>'
+              {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

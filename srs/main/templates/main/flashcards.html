@@ -1,0 +1,60 @@
+{% extends 'main/flashcards_template.html' %}
+
+
+{% block cardfront %}
+  {% if card.variant == "comprehension" %}
+    <strong><h1 class="text-center align-middle" style="font-size:550%">{{card.word_ko}}</h1></strong>
+  {% elif card.variant == "production" %}
+    {% if card.image %}
+    <div class="d-flex justify-content-center py-2">
+      <img src='{{card.image.url}}' style="max-width:100%;">
+    </div>
+    {% endif %}
+  {% elif card.variant == "spelling" %}
+    <h1>이 단어를 철자하세요:</h1>
+    {% if card.image %}
+      <div class="d-flex justify-content-center py-2">
+        <img src='{{card.image.url}}' style="max-width:100%;">
+      </div>
+    {% endif %}
+    {% if card.audio %}
+      <div class="d-flex justify-content-center">
+        <audio controls autoplay>
+          <source src='{{card.audio.url}}'>
+        </audio>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endblock %}
+
+{% block cardback %}
+  {% if card.variant == "comprehension" %}
+    {% if card.audio %}
+      <div class="d-flex justify-content-center">
+        <audio controls>
+          <source src='{{card.audio.url}}'>
+        </audio>
+      </div>
+    {% endif %}
+    {% if card.image %}
+      <div class="d-flex justify-content-center py-2">
+        <img src='{{card.image.url}}' style="max-width:100%;">
+      </div>
+    {% endif %}
+    <h1 class="text-center align-middle">{{card.association}}</h1>
+  {% elif card.variant == "production" %}
+    <strong><h1 class="text-center align-middle" style="font-size:400%">{{card.word_ko}}</h1></strong>
+    {% if card.audio %}
+      <div class="d-flex justify-content-center">
+        <audio controls>
+          <source src='{{card.audio.url}}'>
+        </audio>
+      </div>
+    {% endif %}
+    <h1 class="text-center align-middle">{{card.association}}</h1>
+  {% elif card.variant == "spelling" %}
+    <strong><h1 class="text-center align-middle" style="font-size:500%">{{card.word_ko}}</h1></strong>
+    <h1 class="text-center align-middle">{{card.association}}</h1>
+  {% endif %}
+{% endblock %}
+

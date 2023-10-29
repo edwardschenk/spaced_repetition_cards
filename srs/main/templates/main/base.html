@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Hello{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    {% load static %}
+    <link href="{% static 'css/flip_card_style.css' %}" rel="stylesheet">
+    <script src="{% static 'js/flip_card.js' %}"></script> 
+  </head>
+  <body>
+    
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="col-md-3 mb-2 mb-md-0 px-2">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+        </a>
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/" class="nav-link px-2 link-secondary">Dashboard</a></li>
+        <li><a href="#" class="nav-link px-2">Decks</a></li>
+        <li><a href="#" class="nav-link px-2">Schedule</a></li>
+        <li><a href="#" class="nav-link px-2">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2">About</a></li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button onclick="window.location.href='/register/';" type="button" class="btn btn-primary">Sign-up</button>
+      </div>
+    </header>
+  
+    <div id="content", name="content", class="justify-content-center px-3">
+      {% block content %}
+      <p>default</p>
+      {% endblock %}
+    </div>
+  </body>
+</html>

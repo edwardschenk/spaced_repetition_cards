@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content%}
+<p>
+    <a href="makeset/">Click to Create a cardset</a>
+</p>
+
+<ul>
+    <li>Card Sets:</li>
+    {% for set in card_sets %}
+        <li><a href="{{set.name}}/">{{set.name}}</a></li>
+    {% endfor %}
+</ul>
+
+<div class="card" style="width: 18rem; height: 13rem;">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+</div>
+
+{% endblock %}

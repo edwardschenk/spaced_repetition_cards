@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Create Cards{% endblock %}
+
+
+{% block content%}
+Make Cards
+<form enctype="multipart/form-data" method="post" action="/{{SetName}}/makecards/">
+    {% csrf_token %}
+    <table>
+    {{form.as_table}}
+    </table>
+    <button type="submit", name="save">Create Card</button>
+</form>
+{% endblock %}
