@@ -2,25 +2,25 @@
 
 
 {% block cardfront %}
-  {% if card.variant == "comprehension" %}
-    <strong><h1 class="text-center align-middle" style="font-size:550%">{{card.word_ko}}</h1></strong>
-  {% elif card.variant == "production" %}
-    {% if card.image %}
+  {% if card.variant == "C" %}
+    <strong><h1 class="text-center align-middle" style="font-size:550%">{{card_content.word_ko}}</h1></strong>
+  {% elif card.variant == "P" %}
+    {% if card_content.image %}
     <div class="d-flex justify-content-center py-2">
-      <img src='{{card.image.url}}' style="max-width:100%;">
+      <img src='{{card_content.image.url}}' style="max-width:100%;">
     </div>
     {% endif %}
-  {% elif card.variant == "spelling" %}
+  {% elif card.variant == "S" %}
     <h1>이 단어를 철자하세요:</h1>
-    {% if card.image %}
+    {% if card_content.image %}
       <div class="d-flex justify-content-center py-2">
-        <img src='{{card.image.url}}' style="max-width:100%;">
+        <img src='{{card_content.image.url}}' style="max-width:100%;">
       </div>
     {% endif %}
-    {% if card.audio %}
+    {% if card_content.audio %}
       <div class="d-flex justify-content-center">
         <audio controls autoplay>
-          <source src='{{card.audio.url}}'>
+          <source src='{{card_content.audio.url}}'>
         </audio>
       </div>
     {% endif %}
@@ -28,33 +28,33 @@
 {% endblock %}
 
 {% block cardback %}
-  {% if card.variant == "comprehension" %}
-    {% if card.audio %}
+  {% if card.variant == "C" %}
+    {% if card_content.audio %}
       <div class="d-flex justify-content-center">
         <audio controls>
-          <source src='{{card.audio.url}}'>
+          <source src='{{card_content.audio.url}}'>
         </audio>
       </div>
     {% endif %}
-    {% if card.image %}
+    {% if card_content.image %}
       <div class="d-flex justify-content-center py-2">
-        <img src='{{card.image.url}}' style="max-width:100%;">
+        <img src='{{card_content.image.url}}' style="max-width:100%;">
       </div>
     {% endif %}
-    <h1 class="text-center align-middle">{{card.association}}</h1>
-  {% elif card.variant == "production" %}
-    <strong><h1 class="text-center align-middle" style="font-size:400%">{{card.word_ko}}</h1></strong>
-    {% if card.audio %}
+    <h1 class="text-center align-middle">{{card_content.association}}</h1>
+  {% elif card.variant == "P" %}
+    <strong><h1 class="text-center align-middle" style="font-size:400%">{{card_content.word_ko}}</h1></strong>
+    {% if card_content.audio %}
       <div class="d-flex justify-content-center">
         <audio controls>
-          <source src='{{card.audio.url}}'>
+          <source src='{{card_content.audio.url}}'>
         </audio>
       </div>
     {% endif %}
-    <h1 class="text-center align-middle">{{card.association}}</h1>
-  {% elif card.variant == "spelling" %}
-    <strong><h1 class="text-center align-middle" style="font-size:500%">{{card.word_ko}}</h1></strong>
-    <h1 class="text-center align-middle">{{card.association}}</h1>
+    <h1 class="text-center align-middle">{{card_content.association}}</h1>
+  {% elif card.variant == "S" %}
+    <strong><h1 class="text-center align-middle" style="font-size:500%">{{card_content.word_ko}}</h1></strong>
+    <h1 class="text-center align-middle">{{card_content.association}}</h1>
   {% endif %}
 {% endblock %}
 

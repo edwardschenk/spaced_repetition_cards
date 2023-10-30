@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Q
-from .models import CardSet, Card
+from .models import CardSet, CardContent, Card
 from .forms import CreateNewCardSet, CreateNewCard
 
 from datetime import date, datetime, timedelta
@@ -26,8 +26,8 @@ def flashcards(response, set_name):
             prev_card.answered_correct()
             return HttpResponseRedirect('')
 
-    korean_set = CardSet.objects.get(name=set_name)
-    cards = korean_set.card_set.filter(
+    selected_set = CardSet.objects.get(name=set_name)
+    cards = Card.objects.filter(card_cont__c_set=selected_set).filter(
         (
         Q(last_time_correct__isnull=True)
         ) | (
@@ -53,8 +53,10 @@ def flashcards(response, set_name):
         Q(last_time_correct__date__lte=date.today()-timedelta(days=7))
         )
     )
+
     random_card = choice(cards)
-    return render(response, 'main/flashcards.html', {'card': random_card})
+    card_content = random_card.card_cont
+    return render(response, 'main/flashcards.html', {'card': random_card, 'card_content': card_content})
 
 def create_card_set(response):
     if response.method=='POST':
@@ -74,7 +76,7 @@ def create_card_set(response):
 
 def card_set(response, set_name):
     card_set = CardSet.objects.get(name=set_name)
-    cards = card_set.card_set.all()
+    cards = card_set.cardcontent_set.all()
     return render(response, 'main/card_set_page.html', 
                   {'SetName':card_set.name, 'cards':cards})
 
@@ -84,16 +86,12 @@ def create_cards(response, set_name):
         form = CreateNewCard(response.POST, response.FILES)
 
         if form.is_valid():
-            card = form.save(commit=False)
-            card.card_set = card_set
-            card.variant = 'comprehension'
-            card.save()
-            pk = card.pk 
-            for var in ('production', 'spelling'):
-                new_card = Card.objects.get(id=pk)
-                new_card.pk = None
-                new_card.variant = var
-                new_card.save()
+            card_content = form.save(commit=False)
+            card_content.c_set = card_set
+            card_content.save()
+            for var in (['S','P','C']):
+                variant = Card(card_cont=card_content, variant=var)
+                variant.save()
         return HttpResponseRedirect(f'../../{card_set.name}/')
     else:
         form = CreateNewCard()

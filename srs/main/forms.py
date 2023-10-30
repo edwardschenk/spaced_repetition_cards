@@ -1,5 +1,5 @@
 from django import forms
-from .models import CardSet, Card, CardCategory
+from .models import CardSet, CardContent, CardCategory
 
 class CreateNewCardSet(forms.Form):
     name = forms.CharField(label='Name')
@@ -16,5 +16,5 @@ class CreateNewCard(forms.ModelForm):
     audio = forms.FileField(label='Audio', required=False)
 
     class Meta:
-        model = Card
+        model = CardContent
         fields = ['category', 'word_en', 'word_ko', 'association', 'image', 'audio']
